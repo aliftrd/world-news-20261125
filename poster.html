@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wednesday 25 November 2026 — World News Edition</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1024px;
+    height: 1024px;
+    overflow: hidden;
+    background: #f5efe3;
+    color: #151922;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  }
+  .page {
+    width: 1024px;
+    height: 1024px;
+    padding: 14px 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    background: linear-gradient(180deg, #f8f3e8 0%, #f1e9d8 100%);
+  }
+
+  /* Masthead */
+  .masthead {
+    background: #131824;
+    color: #fbf7ef;
+    border-radius: 10px;
+    padding: 12px 18px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid #c8963e;
+  }
+  .mast-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .kicker {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e6b863;
+    text-transform: uppercase;
+  }
+  .date-title {
+    font-size: 35px;
+    font-weight: 900;
+    letter-spacing: -0.6px;
+    line-height: 1.02;
+    color: #ffffff;
+  }
+  .mast-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+  }
+  .edition-pill {
+    background: #b91c1c;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .sub-meta {
+    font-size: 12px;
+    font-weight: 600;
+    color: #cfd6e3;
+  }
+
+  /* World Map Strip */
+  .map-strip {
+    background: #e7decb;
+    border: 1.5px solid #c5b89e;
+    border-radius: 9px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .map-svg {
+    width: 268px;
+    height: 82px;
+    flex-shrink: 0;
+    background: #1b283b;
+    border-radius: 6px;
+    border: 1px solid #354762;
+  }
+  .lead-banner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .lead-tag {
+    display: inline-block;
+    align-self: flex-start;
+    background: #131824;
+    color: #f3c46b;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .lead-head {
+    font-size: 16.5px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #131824;
+  }
+  .lead-summary {
+    font-size: 11.7px;
+    line-height: 1.3;
+    color: #2f3644;
+    font-weight: 500;
+  }
+
+  /* 8 Story Grid: 2 columns x 4 rows */
+  .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 9px;
+  }
+  .card {
+    background: #fffdf8;
+    border: 1.5px solid #cbbda2;
+    border-radius: 9px;
+    padding: 9px 11px;
+    display: flex;
+    gap: 11px;
+    align-items: stretch;
+    box-shadow: 0 2px 0 rgba(21, 25, 34, 0.06);
+  }
+  .art-box {
+    width: 112px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+  }
+  .tag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .loc {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6b6457;
+    text-transform: uppercase;
+  }
+  .card-title {
+    font-size: 15.2px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #131824;
+    letter-spacing: -0.2px;
+  }
+  .card-text {
+    font-size: 11.3px;
+    line-height: 1.3;
+    color: #303746;
+    font-weight: 500;
+  }
+
+  /* Bottom Wire Ticker */
+  .ticker {
+    background: #131824;
+    color: #f6efe3;
+    border-radius: 8px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ticker-label {
+    background: #c8963e;
+    color: #131824;
+    font-size: 10.5px;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    letter-spacing: 0.6px;
+  }
+  .ticker-items {
+    font-size: 11.2px;
+    font-weight: 600;
+    color: #e6dfd1;
+    line-height: 1.28;
+  }
+
+  .c-blue { background: #1d4ed8; }
+  .c-crimson { background: #b91c1c; }
+  .c-indigo { background: #4338ca; }
+  .c-slate { background: #334155; }
+  .c-green { background: #047857; }
+  .c-rose { background: #9f1239; }
+  .c-amber { background: #b45309; }
+  .c-teal { background: #0f766e; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <!-- MASTHEAD -->
+    <header class="masthead">
+      <div class="mast-left">
+        <div class="kicker">The World in One Day · Global Illustrated Dispatch</div>
+        <h1 class="date-title">WEDNESDAY · 25 NOVEMBER 2026</h1>
+      </div>
+      <div class="mast-right">
+        <span class="edition-pill">WORLD NEWS SUMMARY</span>
+        <span class="sub-meta">6 Continents · Trade · Markets · Space · War · Energy · Courts</span>
+      </div>
+    </header>
+
+    <!-- WORLD MAP + LEAD SUMMARY -->
+    <section class="map-strip">
+      <svg class="map-svg" viewBox="0 0 268 82" xmlns="http://www.w3.org/2000/svg">
+        <rect width="268" height="82" fill="#162233"/>
+        <path d="M20,16 L64,12 L72,26 L56,38 L46,44 L66,52 L60,74 L44,68 L40,48 L26,40 Z" fill="#324966"/>
+        <path d="M110,16 L148,12 L152,30 L128,34 L112,30 Z" fill="#324966"/>
+        <path d="M112,36 L142,36 L150,52 L136,72 L120,68 L110,50 Z" fill="#324966"/>
+        <path d="M152,16 L228,14 L240,36 L214,50 L186,46 L160,42 Z" fill="#324966"/>
+        <path d="M206,54 L238,56 L242,70 L214,72 Z" fill="#324966"/>
+        <line x1="0" y1="41" x2="268" y2="41" stroke="#263852" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <line x1="134" y1="0" x2="134" y2="82" stroke="#263852" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <!-- Story Pins -->
+        <circle cx="56" cy="26" r="4" fill="#60a5fa"/><!-- Washington -->
+        <circle cx="118" cy="22" r="3.5" fill="#34d399"/><!-- London / Strasbourg -->
+        <circle cx="138" cy="24" r="4" fill="#94a3b8"/><!-- Zaporizhzhia -->
+        <circle cx="130" cy="39" r="3.5" fill="#fb7185"/><!-- Cairo -->
+        <circle cx="144" cy="37" r="3.5" fill="#f59e0b"/><!-- Ras Tanura / Jerusalem -->
+        <circle cx="204" cy="28" r="4" fill="#818cf8"/><!-- Jiuquan / Tiangong -->
+        <circle cx="222" cy="28" r="4" fill="#ef4444"/><!-- Seoul / Tokyo / Taipei -->
+        <circle cx="234" cy="61" r="3.5" fill="#2dd4bf"/><!-- Canberra / Bogor -->
+      </svg>
+      <div class="lead-banner">
+        <span class="lead-tag">25 NOV 2026 OVERVIEW</span>
+        <div class="lead-head">US Tariffs Target 14 Economies, Asian Chip Rout &amp; Historic Tiangong Docking</div>
+        <div class="lead-summary">
+          Washington proposes up to 20% tariffs on China, Vietnam, and the EU; AI doubts send Seoul's Kospi down 6.2%; Pakistan's first astronaut docks at China's Tiangong station; Russian strikes cut Ukraine power; UK energy cap jumps 26%.
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 ILLUSTRATED NEWS PANELS -->
+    <main class="grid">
+      <!-- 1. US TARIFFS -->
+      <article class="card">
+        <div class="art-box" style="background:#13203b;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#101b33"/>
+            <!-- Tariff rate bars -->
+            <rect x="16" y="24" width="20" height="54" rx="2" fill="#ef4444"/>
+            <rect x="46" y="34" width="20" height="44" rx="2" fill="#f59e0b"/>
+            <rect x="76" y="42" width="20" height="36" rx="2" fill="#3b82f6"/>
+            <text x="26" y="20" text-anchor="middle" font-size="9" font-weight="900" fill="#fca5a5">20%</text>
+            <text x="56" y="30" text-anchor="middle" font-size="9" font-weight="900" fill="#fde68a">18%</text>
+            <text x="86" y="38" text-anchor="middle" font-size="9" font-weight="900" fill="#93c5fd">15%</text>
+            <!-- Cargo ship hull -->
+            <polygon points="14,84 98,84 88,98 22,98" fill="#64748b"/>
+            <rect x="26" y="76" width="60" height="8" fill="#94a3b8"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-blue">Americas · Trade</span>
+            <span class="loc">Washington &amp; EU</span>
+          </div>
+          <h2 class="card-title">US Proposes Up to 20% Tariffs on 14 Economies</h2>
+          <p class="card-text">Washington targets excess capacity: China &amp; Vietnam face 20%, Cambodia &amp; Indonesia 18%, EU, Korea &amp; Taiwan 15%, plus 10% on Embraer jets; EU &amp; Beijing reject premise.</p>
+        </div>
+      </article>
+
+      <!-- 2. ASIAN CHIP ROUT -->
+      <article class="card">
+        <div class="art-box" style="background:#2d1518;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#271114"/>
+            <!-- Semiconductor chip -->
+            <rect x="20" y="18" width="34" height="34" rx="4" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+            <rect x="28" y="26" width="18" height="18" fill="#475569"/>
+            <!-- Falling chart -->
+            <polyline points="22,68 44,58 64,74 92,90" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="94,92 80,92 92,78" fill="#ef4444"/>
+            <text x="78" y="32" text-anchor="middle" font-size="13" font-weight="900" fill="#fca5a5">−6.2%</text>
+            <text x="78" y="46" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fecaca">KOSPI</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-crimson">Asia · Markets</span>
+            <span class="loc">Seoul, Taipei, Tokyo</span>
+          </div>
+          <h2 class="card-title">AI Doubts Sink Asian Chip Stocks: Kospi −6.2%</h2>
+          <p class="card-text">Kospi drops 6.2% to 4,697.51 as SK hynix plunges 11.1% and Samsung falls 9.9%; Taiwan's Taiex slides 4.8% and Japan's Nikkei closes down 2.8%.</p>
+        </div>
+      </article>
+
+      <!-- 3. PAKISTAN ASTRONAUT & HERA -->
+      <article class="card">
+        <div class="art-box" style="background:#171738;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#131330"/>
+            <circle cx="20" cy="20" r="1.5" fill="#fff"/>
+            <circle cx="94" cy="24" r="1.5" fill="#fff"/>
+            <circle cx="88" cy="78" r="1.5" fill="#a5b4fc"/>
+            <!-- Tiangong Solar Panels & Docking -->
+            <rect x="14" y="36" width="24" height="8" fill="#38bdf8"/>
+            <rect x="74" y="36" width="24" height="8" fill="#38bdf8"/>
+            <rect x="38" y="34" width="36" height="12" rx="3" fill="#e2e8f0"/>
+            <polygon points="56,48 64,66 48,66" fill="#22c55e"/>
+            <!-- Hera Asteroid Crater -->
+            <ellipse cx="56" cy="88" rx="30" ry="12" fill="#64748b"/>
+            <ellipse cx="52" cy="86" rx="10" ry="5" fill="#1e293b"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-indigo">Asia &amp; World · Space</span>
+            <span class="loc">Tiangong &amp; Orbit</span>
+          </div>
+          <h2 class="card-title">Pakistan's First Astronaut Docks at Tiangong Station</h2>
+          <p class="card-text">Muhammad Zeeshan Ali, 40, docks aboard Shenzhou-24 as Tiangong's first foreign visitor. ESA's Hera reveals DART's stadium-sized crater; FCC clears SpaceX's 1M orbital centers.</p>
+        </div>
+      </article>
+
+      <!-- 4. UKRAINE POWER STRIKES -->
+      <article class="card">
+        <div class="art-box" style="background:#1f242d;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#1a1f28"/>
+            <!-- Cooling towers -->
+            <path d="M16,92 L22,46 L42,46 L48,92 Z" fill="#475569"/>
+            <path d="M54,92 L60,50 L78,50 L84,92 Z" fill="#334155"/>
+            <!-- Warning & power loss -->
+            <polygon points="68,18 88,52 48,52" fill="#ef4444"/>
+            <text x="68" y="46" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">!</text>
+            <rect x="14" y="88" width="84" height="10" fill="#0f172a"/>
+            <text x="56" y="78" text-anchor="middle" font-size="8.6" font-weight="900" fill="#fbbf24">17TH GRID LOSS</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-slate">Europe · War &amp; Energy</span>
+            <span class="loc">Zaporizhzhia, Ukraine</span>
+          </div>
+          <h2 class="card-title">Russian Strikes Kill 5, Cut Power in 5 Regions</h2>
+          <p class="card-text">Zaporizhzhia nuclear plant loses external power for the 17th time in 2026 and switches to diesel; DTEK &amp; Poltava gas sites hit. Zelensky seeks €115bn in 2027 aid.</p>
+        </div>
+      </article>
+
+      <!-- 5. UK ENERGY CAP & EU QUANTUM FUND -->
+      <article class="card">
+        <div class="art-box" style="background:#0f2922;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#0c231c"/>
+            <!-- Energy Gauge -->
+            <path d="M22,68 A34,34 0 0,1 90,68" fill="none" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+            <path d="M22,68 A34,34 0 0,1 86,52" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round"/>
+            <line x1="56" y1="68" x2="80" y2="48" stroke="#fbbf24" stroke-width="3.5" stroke-linecap="round"/>
+            <text x="56" y="86" text-anchor="middle" font-size="12" font-weight="900" fill="#a7f3d0">+26% CAP</text>
+            <text x="56" y="100" text-anchor="middle" font-size="10" font-weight="800" fill="#fde68a">£2,166 / YR</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-green">Europe · Economy</span>
+            <span class="loc">London &amp; Strasbourg</span>
+          </div>
+          <h2 class="card-title">UK Energy Cap Jumps 26% to £2,166 · EU €50B Fund</h2>
+          <p class="card-text">Ofgem raises UK bills by £443/yr from Jan 1 due to Middle East gas spikes; Poundland collapses (11,000 jobs at risk). EU proposes €50bn AI &amp; Quantum equity fund.</p>
+        </div>
+      </article>
+
+      <!-- 6. AFRICA: CAIRO BLAST & RAMAPHOSA -->
+      <article class="card">
+        <div class="art-box" style="background:#2e1420;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#29111c"/>
+            <!-- Tanker flame -->
+            <circle cx="36" cy="50" r="18" fill="#e11d48" opacity="0.85"/>
+            <circle cx="36" cy="52" r="9" fill="#fbbf24"/>
+            <rect x="16" y="68" width="42" height="16" rx="4" fill="#475569"/>
+            <!-- Judicial Gavel -->
+            <rect x="66" y="28" width="26" height="12" rx="2" fill="#fbbf24" transform="rotate(-25 79 34)"/>
+            <rect x="78" y="38" width="6" height="28" fill="#d97706" transform="rotate(-25 81 52)"/>
+            <rect x="62" y="74" width="34" height="8" rx="2" fill="#94a3b8"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-rose">Africa · Crisis &amp; Law</span>
+            <span class="loc">Cairo &amp; Cape Town</span>
+          </div>
+          <h2 class="card-title">Cairo Tanker Blast Kills 30 · Court Clears Ramaphosa</h2>
+          <p class="card-text">Fuel tanker crash on Cairo Ring Road kills at least 30 and injures 25+. High Court voids 2022 'Farmgate' impeachment report on SA's Ramaphosa; RSF drones kill 19 in Sudan.</p>
+        </div>
+      </article>
+
+      <!-- 7. MIDDLE EAST: RAS TANURA & NETANYAHU -->
+      <article class="card">
+        <div class="art-box" style="background:#2d1f11;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#281b0e"/>
+            <!-- Oil storage tanks & interceptor -->
+            <rect x="16" y="62" width="32" height="28" rx="3" fill="#b45309"/>
+            <rect x="52" y="68" width="26" height="22" rx="3" fill="#92400e"/>
+            <path d="M22,38 Q54,18 88,34" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <circle cx="82" cy="31" r="7" fill="#ef4444"/>
+            <circle cx="82" cy="31" r="3" fill="#fde047"/>
+            <rect x="12" y="90" width="88" height="8" fill="#451a03"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-amber">Middle East · Conflict</span>
+            <span class="loc">Ras Tanura &amp; Jerusalem</span>
+          </div>
+          <h2 class="card-title">Saudis Down Houthi Drones · Netanyahu Trial Rethink</h2>
+          <p class="card-text">Coalition intercepts 4 Houthi drones over Ras Tanura refinery after Hodeidah strike. Jerusalem judges urge dropping Case 4000 bribery charge; Knesset advances Oct 7 inquiry (65–50).</p>
+        </div>
+      </article>
+
+      <!-- 8. ASIA PACIFIC: SOLOMONS PACT & DHAKA WAGE -->
+      <article class="card">
+        <div class="art-box" style="background:#0f272b;">
+          <svg viewBox="0 0 112 112" width="112" height="112">
+            <rect width="112" height="112" fill="#0c2226"/>
+            <!-- Treaty ribbon & shield -->
+            <path d="M28,20 L84,20 L84,52 Q56,68 28,52 Z" fill="#14b8a6"/>
+            <text x="56" y="42" text-anchor="middle" font-size="10" font-weight="900" fill="#042f2e">A$740M</text>
+            <!-- Wage rise badge -->
+            <rect x="18" y="72" width="76" height="22" rx="5" fill="#065f46" stroke="#34d399" stroke-width="1.5"/>
+            <text x="56" y="87" text-anchor="middle" font-size="10.5" font-weight="900" fill="#ecfdf5">+36% WAGE</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-teal">Asia-Pacific · Policy</span>
+            <span class="loc">Canberra, Dhaka, Java</span>
+          </div>
+          <h2 class="card-title">Solomons Signs A$740M Australia Pact · Dhaka +36% Wage</h2>
+          <p class="card-text">Solomons &amp; Australia ink 10-yr security treaty as Beijing pact lapses. Bangladesh raises garment minimum wage 36% to $136/mo; illegal West Java gold mine flood kills 9 (17 trapped).</p>
+        </div>
+      </article>
+    </main>
+
+    <!-- BOTTOM TICKER -->
+    <footer class="ticker">
+      <span class="ticker-label">ALSO 25 NOV</span>
+      <div class="ticker-items">
+        North Korea gives Swiss envoy 48h to leave · Malaysia sues Google for RM600m over YouTube content · Australia Oct inflation jumps to 4.9% · US Army detonates 10,000 lb lead azide in Iowa · EU court orders cage-free farming timeline
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
